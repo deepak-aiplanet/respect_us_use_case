@@ -6,7 +6,7 @@ import graphviz
 from langchain_community.chat_models import AzureChatOpenAI
 from langchain.vectorstores import Chroma
 from langchain.retrievers import ContextualCompressionRetriever
-from langchain.retrievers.document_compressors import CohereRerank
+# from langchain.retrievers.document_compressors import CohereRerank
 from langchain.retrievers import EnsembleRetriever
 from langchain_community.retrievers import BM25Retriever, TFIDFRetriever
 from langchain.text_splitter import RecursiveCharacterTextSplitter
