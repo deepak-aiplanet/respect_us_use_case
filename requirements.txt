@@ -1,10 +1,8 @@
 langchain
 streamlit
-langchain
 PyPDF2
 pypdf
 python-dotenv
-streamlit
 faiss-cpu
 openai
 graphviz
