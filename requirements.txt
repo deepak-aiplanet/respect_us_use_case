@@ -9,6 +9,9 @@ streamlit-extras
 openai
 graphviz
 altair<5
+streamlit_chat
+streamlit_extras
+langchain_community
 
 
 
