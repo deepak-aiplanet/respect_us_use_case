@@ -6,12 +6,9 @@ pypdf
 python-dotenv
 streamlit
 faiss-cpu
-streamlit-extras
 openai
 graphviz
 altair<5
-streamlit_chat
-streamlit-extras
 langchain_community
 langchain-huggingface
 langchain_chroma
