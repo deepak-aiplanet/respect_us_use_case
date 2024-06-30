@@ -15,6 +15,6 @@ streamlit-extras
 langchain_community
 langchain-huggingface
 langchain_chroma
-sqlite3 >= 3.35.0
+sqlite3>=3.35.0
 
 
