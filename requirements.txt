@@ -1,7 +1,8 @@
 langchain
 streamlit
 langchain
-PyPDF2==3.0.1
+PyPDF2
+pypdf
 python-dotenv==1.0.0
 streamlit==1.18.1
 faiss-cpu==1.7.4
