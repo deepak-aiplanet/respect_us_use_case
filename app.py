@@ -5,7 +5,9 @@ from PyPDF2 import PdfReader
 from graphviz import Digraph
 from langchain.embeddings import HuggingFaceEmbeddings
 import graphviz
-from streamlit_chat import message
+from langchain_community.vectorstores import Weaviate
+# from langchain_openai import AzureOpenAIEmbeddings, OpenAIEmbeddings
+# from streamlit_chat import message
 # from streamlit_extras.colored_header import colored_header
 # from streamlit_extras.add_vertical_space import add_vertical_space
 from langchain_community.chat_models import AzureChatOpenAI
@@ -160,9 +162,66 @@ def load_conv_chain(ensemble_retriever):
         model_kwargs=model_kwargs, # Pass the model configuration options
         encode_kwargs=encode_kwargs # Pass the encoding options
     )
+    import weaviate
+    from langchain_weaviate.vectorstores import WeaviateVectorStore
+
+    # Set these environment variables
+    # WEAVIATE_URL       your Weaviate instance URL
+    # WEAVIATE_API_KEY   your Weaviate instance API key
+
+    # import os
+    # import weaviate
+
+    # # Create the client
+    # weaviate_client = weaviate.WeaviateClient(
+    #     url='https://testing-gnhr9tyl.weaviate.network',
+    #     auth_client_secret=weaviate.auth.AuthApiKey(api_key='piUPviR82maCNEXYanQHbzkljZwvzlC9Pd0b'),
+    # )
 
 
-    vectorstore = Chroma.from_documents(documents=ensemble_retriever, embedding=embeddings)
+    # # vectorstore = Chroma.from_documents(documents=ensemble_retriever, embedding=embeddings)
+    # # weaviate_client = weaviate.connect_to_local()
+    # db = WeaviateVectorStore.from_documents(ensemble_retriever, embeddings, client=weaviate_client)
+
+
+    import weaviate
+    from langchain.vectorstores import Weaviate
+
+    # Connect to your Weaviate instance
+    # client = weaviate.Client("https://testing-gnhr9tyl.weaviate.network") # Replace with your Weaviate endpoint
+
+    # vectorstore = Weaviate(
+    #     client=client,
+    #     index_name="Usecaase", # Replace with your Weaviate class name
+    #     text_key="content",  # Replace with the property name where you store text
+    #     embedding_function=embeddings  # Provide your embedding function
+    # )
+
+    os.environ["WEAVIATE_API_KEY"] = "piUPviR82maCNEXYanQHbzkljZwvzlC9Pd0b"
+    os.environ["WEAVIATE_ENVIRONMENT"] = ""
+# if os.environ.get("WEAVIATE_ENVIRONMENT", None) is None:
+#     raise Exception("Missing `WEAVIATE_ENVIRONMENT` environment variable.")
+
+        # Add to vectorDB
+    # vectorstore = Weaviate.from_documents(
+    #     documents=ensemble_retriever, embedding=embeddings, index_name='Usecaase'
+    # )
+    # retriever = vectorstore.as_retriever()
+
+    # retriever = db.as_retriever()
+
+    import weaviate
+    from langchain.vectorstores import Weaviate
+
+
+    WEAVIATE_URL = "https://testing-gnhr9tyl.weaviate.network"
+    WEAVIATE_API_KEY = "piUPviR82maCNEXYanQHbzkljZwvzlC9Pd0b"
+
+    client = weaviate.Client(
+        url=WEAVIATE_URL, auth_client_secret=weaviate.AuthApiKey(WEAVIATE_API_KEY)
+    )
+    vectorstore = Weaviate.from_documents(
+    ensemble_retriever, embeddings, client=client, by_text=False) 
 
     retriever = vectorstore.as_retriever()
 
