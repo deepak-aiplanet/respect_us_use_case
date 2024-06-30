@@ -1,6 +1,5 @@
 import streamlit as st
 import os, json 
-from langchain.document_loaders import OnlinePDFLoader
 from PyPDF2 import PdfReader
 from graphviz import Digraph
 import graphviz
