@@ -11,7 +11,7 @@ from langchain_community.vectorstores import Weaviate
 # from streamlit_extras.colored_header import colored_header
 # from streamlit_extras.add_vertical_space import add_vertical_space
 from langchain_community.chat_models import AzureChatOpenAI
-from langchain.vectorstores import Chroma
+# from langchain.vectorstores import Chroma
 from langchain.retrievers import ContextualCompressionRetriever
 from langchain.retrievers.document_compressors import CohereRerank
 from langchain.retrievers import EnsembleRetriever
@@ -23,7 +23,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_community.document_loaders.csv_loader import CSVLoader
 import os, tempfile
 import streamlit as st
-from langchain_chroma import Chroma
+# from langchain_chroma import Chroma
 from langchain_community.document_loaders import PyPDFLoader
 st.set_page_config(page_title="Decision Tree")    
 
