@@ -13,6 +13,7 @@ altair<5
 streamlit_chat
 streamlit-extras
 langchain_community
+langchain-huggingface
 
 
 
