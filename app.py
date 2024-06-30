@@ -3,9 +3,6 @@ import os, json
 from PyPDF2 import PdfReader
 from graphviz import Digraph
 import graphviz
-from streamlit_chat import message
-from streamlit_extras.colored_header import colored_header
-from streamlit_extras.add_vertical_space import add_vertical_space
 from langchain_community.chat_models import AzureChatOpenAI
 from langchain.embeddings import HuggingFaceInferenceAPIEmbeddings
 from langchain.vectorstores import Chroma
