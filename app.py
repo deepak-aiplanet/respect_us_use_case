@@ -1,12 +1,18 @@
 import streamlit as st
 import os, json 
+from langchain.document_loaders import OnlinePDFLoader
 from PyPDF2 import PdfReader
 from graphviz import Digraph
+from langchain.embeddings import HuggingFaceEmbeddings
 import graphviz
+from langchain_openai import AzureOpenAIEmbeddings, OpenAIEmbeddings
+from streamlit_chat import message
+from streamlit_extras.colored_header import colored_header
+from streamlit_extras.add_vertical_space import add_vertical_space
 from langchain_community.chat_models import AzureChatOpenAI
 from langchain.vectorstores import Chroma
 from langchain.retrievers import ContextualCompressionRetriever
-# from langchain.retrievers.document_compressors import CohereRerank
+from langchain.retrievers.document_compressors import CohereRerank
 from langchain.retrievers import EnsembleRetriever
 from langchain_community.retrievers import BM25Retriever, TFIDFRetriever
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -16,6 +22,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_community.document_loaders.csv_loader import CSVLoader
 import os, tempfile
 import streamlit as st
+from langchain_chroma import Chroma
 from langchain_community.document_loaders import PyPDFLoader
 st.set_page_config(page_title="Decision Tree")    
 
@@ -139,11 +146,32 @@ def load_conv_chain(ensemble_retriever):
     #     base_compressor = compressor, 
     #     base_retriever = ensemble_retriever)
 
+    # Define the path to the pre-trained model you want to use
+    modelPath = "sentence-transformers/all-MiniLM-l6-v2"
+
+    # Create a dictionary with model configuration options, specifying to use the CPU for computations
+    model_kwargs = {'device':'cpu'}
+
+    # Create a dictionary with encoding options, specifically setting 'normalize_embeddings' to False
+    encode_kwargs = {'normalize_embeddings': False}
+
+    # Initialize an instance of HuggingFaceEmbeddings with the specified parameters
+    embeddings = HuggingFaceEmbeddings(
+        model_name=modelPath,     # Provide the pre-trained model's path
+        model_kwargs=model_kwargs, # Pass the model configuration options
+        encode_kwargs=encode_kwargs # Pass the encoding options
+    )
+
+
+    vectorstore = Chroma.from_documents(documents=ensemble_retriever, embedding=embeddings)
+
+    retriever = vectorstore.as_retriever()
+
     prompt = ChatPromptTemplate.from_template(template)
     output_parser = StrOutputParser()
             
     chain = (
-    {"context": ensemble_retriever, "query": RunnablePassthrough()}
+    {"context": retriever, "query": RunnablePassthrough()}
     | prompt
     | llm
     | output_parser
@@ -206,8 +234,8 @@ def main():
         with st.spinner("Processing..."):
 
             text_chunks = load_data(uploaded_file.read())
-            ensemble_retriever = load_retrievers(text_chunks)
-            chain = load_conv_chain(ensemble_retriever)
+            # ensemble_retriever = load_retrievers(text_chunks)
+            chain = load_conv_chain(text_chunks)
 
             decision_tree_json = chain.invoke("Give Decision tree in the document")
             response = json.loads(decision_tree_json)
