@@ -6,8 +6,8 @@ from graphviz import Digraph
 from langchain.embeddings import HuggingFaceEmbeddings
 import graphviz
 from streamlit_chat import message
-from streamlit_extras.colored_header import colored_header
-from streamlit_extras.add_vertical_space import add_vertical_space
+# from streamlit_extras.colored_header import colored_header
+# from streamlit_extras.add_vertical_space import add_vertical_space
 from langchain_community.chat_models import AzureChatOpenAI
 from langchain.vectorstores import Chroma
 from langchain.retrievers import ContextualCompressionRetriever
