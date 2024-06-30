@@ -17,6 +17,7 @@ langchain-huggingface
 langchain_chroma
 langchain_weaviate
 weaviate-client
+protoc>=3.19.0
 
 
 
