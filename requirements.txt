@@ -15,7 +15,8 @@ streamlit-extras
 langchain_community
 langchain-huggingface
 chroma-hnswlib==0.7.3
-chromadb==0.5.3
+chromadb==0.3.29
+
 langchain-chroma==0.1.2
 
 
