@@ -27,6 +27,9 @@ from langchain_chroma import Chroma
 from langchain_community.document_loaders import PyPDFLoader
 st.set_page_config(page_title="Decision Tree")    
 
+os.environ["PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION"] = "python"
+
+
 def load_data(file_content):
 
     with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_pdf:
