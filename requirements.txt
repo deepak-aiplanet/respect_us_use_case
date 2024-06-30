@@ -12,7 +12,7 @@ langchain-huggingface
 langchain_chroma
 langchain_weaviate
 weaviate-client
-
+protobuf==3.19.4
 
 
 
