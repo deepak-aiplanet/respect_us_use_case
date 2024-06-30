@@ -8,5 +8,7 @@ faiss-cpu==1.7.4
 streamlit-extras
 openai
 graphviz
+altair<5
+
 
 
