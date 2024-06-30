@@ -4,7 +4,6 @@ from PyPDF2 import PdfReader
 from graphviz import Digraph
 import graphviz
 from langchain_community.chat_models import AzureChatOpenAI
-from langchain.embeddings import HuggingFaceInferenceAPIEmbeddings
 from langchain.vectorstores import Chroma
 from langchain.retrievers import ContextualCompressionRetriever
 from langchain.retrievers.document_compressors import CohereRerank
